@@ -1,0 +1,75 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+
+    var tela = document.querySelector('canvas');
+    var pincel = tela.getContext('2d');
+
+    pincel.fillStyle = 'lightgray';
+    pincel.fillRect(0, 0, 600, 400);
+
+    // o var declarado no inicio serve para ela ser utilizada em qualquer uma das funções. 
+    var raio = 10; 
+    // essas variaveis começam sem valor nenhum, pois elas seram chamadas dentro de qualuqer outra função.
+    var xAleatorio; 
+    var yAleatorio;
+
+    function desenhaCirculo(x, y, raio, cor) {
+
+        pincel.fillStyle = cor;
+        pincel.beginPath();
+        pincel.arc(x, y, raio, 0, 2 * Math.PI);
+        pincel.fill();
+
+    }
+
+    function limpaTela() {
+
+        pincel.clearRect(0, 0, 600, 400);
+    }
+
+    // o alvo muda sempre de localização então é necessário criar uma funcão.
+    function desenhaAlvo (x, y){
+
+        // x e y mudaram conforme a localização mudar
+        desenhaCirculo(x, y, raio + 20, "red");
+        desenhaCirculo(x, y, raio + 10, "white");
+        desenhaCirculo(x, y, raio, "red");
+    }
+
+    // parar gerar coordenadas aleatorias
+    // parametro maximo que pode sortear entre 0 a 600 e 0 a 400
+    function sorteiaPosicao (maximo){ 
+
+        // floor arredonda para baixo.
+        return Math.floor (Math.random()*maximo);
+    }
+
+    // para o alvo mover sozinho sem precisar atualizar a tela 
+    function atualizaTela (){
+        limpaTela(); // limpar o desenho anterior.
+        xAleatorio = sorteiaPosicao(600);
+        yAleatorio = sorteiaPosicao(400);
+        desenhaAlvo(xAleatorio, yAleatorio);
+    }
+    
+    setInterval(atualizaTela, 1000);
+
+    // para poder clicar no alvo // evento pois é algo que iria fazer na tela
+    function dispara (evento){
+        var x = evento.pageX - tela.offsetLeft;
+        var y = evento.pageY - tela.offsetTop;
+
+        if((x > xAleatorio - raio)
+            && (x < xAleatorio + raio)
+            && (y > yAleatorio - raio)
+            && (y < yAleatorio + raio)) {
+
+        alert('Acertou!');
+
+    } else {
+        alert ("Errou!");
+    }
+    }
+    tela.onclick = dispara; 
+</script>

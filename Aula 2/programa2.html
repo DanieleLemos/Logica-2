@@ -1,0 +1,56 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+/* fazendo de forma mais verbosa 
+  
+    var tela = document.querySelector ("canvas");
+    var pincel = tela.getContext("2d");
+
+    pincel.fillStyle = "green";
+    pincel.fillRect(0, 0, 50, 50);
+    // codigo para fazer borda 
+    pincel.fillStroke = "black"; // quando não definimos a cor da borda ela será sempre black.
+    // pincel.strokeStyle ="red"; neste caso para definir outra cor é necessário o uso do codigo strokeStyle. 
+    pincel.strokeRect (0, 0, 50, 50);
+    
+    pincel.fillRect(50, 0, 50,50);
+    pincel.strokeRect (50, 0, 50, 50);
+
+    pincel.fillRect(100, 0, 50, 50);
+    pincel.strokeRect (100, 0, 50, 50); de forma mais verbosa
+
+ */ 
+</script>
+
+<script>
+// usando codigo function para desenhar mais de um quadrado e com cores diferentes
+// função serve para criar parametros diferentes sem precisar repetir o mesmo varias vezes. 
+function desenhaQuadrado(x, y, cor){
+
+        var tela = document.querySelector ("canvas");
+        var pincel = tela.getContext("2d");
+
+        pincel.fillStyle = cor;
+        pincel.fillRect(x, y, 50, 50);
+        // codigo para fazer borda 
+        pincel.fillStroke = "black"; // quando não definimos a cor da borda ela será sempre black.
+        // pincel.strokeStyle ="red"; neste caso para definir outra cor é necessário o uso do codigo strokeStyle. 
+        pincel.strokeRect (x, y, 50, 50);
+}
+/*desenhaQuadrado(0, 0, "green");
+  desenhaQuadrado(50, 0, "green");
+  desenhaQuadrado(100, 0, "green"); */
+
+/* usando codigo while para fazer repetições 
+var x = 0; 
+while(x < 600){
+    desenhaQuadrado(x, 0, "green");
+    x = x + 50;
+} */
+
+// usando for como outra estrutura de repetição
+
+for(var x = 0; x<600; x= x+50){
+    desenhaQuadrado(x, 0, "green");
+}
+</script>
